@@ -21,6 +21,56 @@
     }
   },
   "projects": {
+    "eskimal": {
+      "root": "apps/eskimal",
+      "sourceRoot": "apps/eskimal/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/eskimal",
+            "main": "apps/eskimal/src/main.ts",
+            "tsConfig": "apps/eskimal/tsconfig.app.json",
+            "assets": ["apps/eskimal/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/eskimal/src/environments/environment.ts",
+                  "with": "apps/eskimal/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "eskimal:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/eskimal/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/eskimal"],
+          "options": {
+            "jestConfig": "apps/eskimal/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "persona": {
       "root": "apps/persona",
       "sourceRoot": "apps/persona/src",

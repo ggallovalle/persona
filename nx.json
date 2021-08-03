@@ -23,6 +23,9 @@
     }
   },
   "projects": {
+    "eskimal": {
+      "tags": []
+    },
     "persona": {
       "tags": []
     },
