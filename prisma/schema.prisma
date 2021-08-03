@@ -11,10 +11,10 @@ generator client {
 }
 
 model User {
-  id        Int     @id @default(autoincrement()) @map("user_id")
-  name      String  @map("name")
-  address   Address @relation(fields: [addressId], references: [id])
-  addressId Int     @map("address_id")
+  id        Int      @id @default(autoincrement()) @map("user_id")
+  name      String   @map("name")
+  address   Address? @relation(fields: [addressId], references: [id])
+  addressId Int?     @map("address_id")
 
   @@map("user")
 }
