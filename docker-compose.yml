@@ -5,7 +5,7 @@ networks:
     driver: bridge
 
 services:
-  pstgresdb:
+  postgresdb:
     container_name: postgresdb
     image: postgres:${ESKIMAL_POSTGRES_VERSION}
     restart: always
@@ -32,6 +32,8 @@ services:
     image: eskimal:nx-dev
     ports:
       - ${ESKIMAL_EXPOSE_PORT}:4939
+    depends_on:
+      - postgresdb
     env_file:
       - .env
     environment:
