@@ -1,0 +1,125 @@
+{
+  "version": 2,
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "defaultProject": "persona",
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
+  },
+  "projects": {
+    "persona": {
+      "root": "apps/persona",
+      "sourceRoot": "apps/persona/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/persona",
+            "index": "apps/persona/src/index.html",
+            "main": "apps/persona/src/main.tsx",
+            "polyfills": "apps/persona/src/polyfills.ts",
+            "tsConfig": "apps/persona/tsconfig.app.json",
+            "assets": [
+              "apps/persona/src/favicon.ico",
+              "apps/persona/src/assets"
+            ],
+            "styles": ["apps/persona/src/styles.scss"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/persona/src/environments/environment.ts",
+                  "with": "apps/persona/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "persona:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "persona:build:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/persona/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/persona"],
+          "options": {
+            "jestConfig": "apps/persona/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "persona-e2e": {
+      "root": "apps/persona-e2e",
+      "sourceRoot": "apps/persona-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/persona-e2e/cypress.json",
+            "tsConfig": "apps/persona-e2e/tsconfig.e2e.json",
+            "devServerTarget": "persona:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "persona:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/persona-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
