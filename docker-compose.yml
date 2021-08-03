@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  eskimal_pg_db:
+    image: postgres:${ESKIMAL_POSTGRES_VERSION?:error}
+    restart: always
+    ports:
+      - ${ESKIMAL_POSTGRES_PORT?:error}:5432
+    env_file:
+      - .env
+    environment:
+      POSTGRES_PASSWORD: ${ESKIMAL_POSTGRES_PASSWORD?:error}
